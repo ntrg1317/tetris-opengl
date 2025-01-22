@@ -147,5 +147,4 @@ Sau khi xây dựng, tệp thực thi sẽ nằm trong thư mục `build`. Chạ
    ```
 5. Tạo pull request.
 
----
 
