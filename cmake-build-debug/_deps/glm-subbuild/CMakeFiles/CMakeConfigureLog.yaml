@@ -9,3 +9,14 @@ events:
     message: |
       The system is: Linux - 5.15.0-125-generic - x86_64
 ...
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/snap/clion/310/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:16 (project)"
+    message: |
+      The system is: Linux - 5.15.0-127-generic - x86_64
+...

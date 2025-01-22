@@ -5,16 +5,26 @@ cmake_minimum_required(VERSION 3.5)
 
 if(EXISTS "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-gitclone-lastrun.txt" AND EXISTS "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-gitinfo.txt" AND
   "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-gitclone-lastrun.txt" IS_NEWER_THAN "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-gitinfo.txt")
-  message(STATUS
+  message(VERBOSE
     "Avoiding repeated git clone, stamp file is up to date: "
     "'/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-gitclone-lastrun.txt'"
   )
   return()
 endif()
 
+# Even at VERBOSE level, we don't want to see the commands executed, but
+# enabling them to be shown for DEBUG may be useful to help diagnose problems.
+cmake_language(GET_MESSAGE_LOG_LEVEL active_log_level)
+if(active_log_level MATCHES "DEBUG|TRACE")
+  set(maybe_show_command COMMAND_ECHO STDOUT)
+else()
+  set(maybe_show_command "")
+endif()
+
 execute_process(
   COMMAND ${CMAKE_COMMAND} -E rm -rf "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-src"
   RESULT_VARIABLE error_code
+  ${maybe_show_command}
 )
 if(error_code)
   message(FATAL_ERROR "Failed to remove directory: '/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-src'")
@@ -29,11 +39,12 @@ while(error_code AND number_of_tries LESS 3)
             clone --no-checkout --config "advice.detachedHead=false" "https://github.com/g-truc/glm.git" "glm-src"
     WORKING_DIRECTORY "/home/trangnt/ĐHMT/cmake-build-debug/_deps"
     RESULT_VARIABLE error_code
+    ${maybe_show_command}
   )
   math(EXPR number_of_tries "${number_of_tries} + 1")
 endwhile()
 if(number_of_tries GREATER 1)
-  message(STATUS "Had to git clone more than once: ${number_of_tries} times.")
+  message(NOTICE "Had to git clone more than once: ${number_of_tries} times.")
 endif()
 if(error_code)
   message(FATAL_ERROR "Failed to clone repository: 'https://github.com/g-truc/glm.git'")
@@ -44,6 +55,7 @@ execute_process(
           checkout "bf71a834948186f4097caa076cd2663c69a10e1e" --
   WORKING_DIRECTORY "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-src"
   RESULT_VARIABLE error_code
+  ${maybe_show_command}
 )
 if(error_code)
   message(FATAL_ERROR "Failed to checkout tag: 'bf71a834948186f4097caa076cd2663c69a10e1e'")
@@ -56,6 +68,7 @@ if(init_submodules)
             submodule update --recursive --init 
     WORKING_DIRECTORY "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-src"
     RESULT_VARIABLE error_code
+    ${maybe_show_command}
   )
 endif()
 if(error_code)
@@ -67,6 +80,7 @@ endif()
 execute_process(
   COMMAND ${CMAKE_COMMAND} -E copy "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-gitinfo.txt" "/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-gitclone-lastrun.txt"
   RESULT_VARIABLE error_code
+  ${maybe_show_command}
 )
 if(error_code)
   message(FATAL_ERROR "Failed to copy script-last-run stamp file: '/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-gitclone-lastrun.txt'")

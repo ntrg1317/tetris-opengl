@@ -8,22 +8,26 @@ include_directories(.)
 
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
+find_package(Freetype REQUIRED)
 
 # Add sources for GLAD
-set(GLAD_SRC src/glad.c
-#        src/input/InputHandler.cpp
-#        src/input/InputHandler.h
-)
+set(GLAD_SRC include/glad.c)
+
+set(ASSET_PATH "${CMAKE_SOURCE_DIR}/assets")
+add_definitions(-DASSET_PATH="${ASSET_PATH}")
 
 add_executable(HMT
-        main.cpp
-#        src/Game.cpp
-#        src/Tetris.cpp
-#        src/Tetromino.cpp
-#        src/Renderer.cpp
-#        src/input/InputHandler.cpp
+#        main.cpp
+        src/main.cpp
+        src/game.cpp
+        src/render.cpp
+        src/texture.cpp
+        src/shader.cpp
         ${GLAD_SRC}
-        stb_image.h
+        src/tetromino.cpp
+        src/block.cpp
+        src/resourceManager.cpp
+        src/squareMap.cpp
 )
 
 target_include_directories(HMT PUBLIC
@@ -46,5 +50,6 @@ target_link_libraries(HMT
         OpenGL::GL
         GLEW::GLEW
         glm::glm
+        Freetype::Freetype
         ${CMAKE_DL_LIBS}
 )
