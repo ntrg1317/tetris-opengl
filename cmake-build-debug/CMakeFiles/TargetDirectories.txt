@@ -1,7 +1,0 @@
-/home/trangnt/ĐHMT/cmake-build-debug/CMakeFiles/HMT.dir
-/home/trangnt/ĐHMT/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/trangnt/ĐHMT/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-build/CMakeFiles/edit_cache.dir
-/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-build/CMakeFiles/rebuild_cache.dir
-/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-build/glm/CMakeFiles/edit_cache.dir
-/home/trangnt/ĐHMT/cmake-build-debug/_deps/glm-build/glm/CMakeFiles/rebuild_cache.dir
