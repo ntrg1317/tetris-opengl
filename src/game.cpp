@@ -75,8 +75,7 @@ void Game::Update()
     }
     if (CurrBlock->checkDownAvail(Squares->getValues())) {
         CurrBlock->downUpdate();
-    }
-    else {
+    } else {
         std::cout << "BLOCK COLLAPSE SIGNAL INSIDE GAME" << std::endl;
         Squares->collapseBlock(CurrBlock->getCollapseVals());
         Squares->checkLines(score);

@@ -21,7 +21,7 @@ bool updatable = true;
 bool isPaused = false;
 bool downpress = false;
 float timestepInput = 0.1f;
-float timestepUpdate = 1.0f;
+float timestepUpdate = 0.5f;
 int main(int argc, char* argv[])
 {
     glfwInit();
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 
     float deltaTimeUpdate = 0.0f;
     float lastFrameUpdate = 0.0f;
-    timestepUpdate = 1.0f;
+    timestepUpdate = 0.5f;
 
     while (!glfwWindowShouldClose(window))
     {
@@ -107,8 +107,6 @@ int main(int argc, char* argv[])
         glfwSwapBuffers(window);
     }
 
-    // delete all resources as loaded using the resource manager
-    // ---------------------------------------------------------
     ResourceManager::Clear();
 
     glfwTerminate();

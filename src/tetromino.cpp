@@ -64,7 +64,7 @@ void Tetromino::changePosLeft() {
 }
 
 void Tetromino::downUpdate() {
-    if (this->pos_Y <= 19) {
+    if (this->pos_Y < 19) {
         this->pos_Y = this->pos_Y + 1;
     } else {
         this->pos_Y = 19;
